@@ -1,6 +1,9 @@
 #include "keyboard.h"
 #include <stdint.h>
 
+#define KEY_UP    0x01
+#define KEY_DOWN  0x02
+
 static inline uint8_t inb(uint16_t port) {
     uint8_t ret;
     __asm__ volatile ("inb %1, %0" : "=a"(ret) : "Nd"(port));
@@ -36,6 +39,26 @@ int keyboard_read_char(char *out) {
 /* called from ISR */
 void keyboard_isr(void) {
     uint8_t sc = inb(0x60);
+
+    if (sc == 0x48) {        // up arrow
+        buf_push(KEY_UP);
+        return;
+    }
+    if (sc == 0x50) {        // down arrow
+        buf_push(KEY_DOWN);
+        return;
+    }
+
+    if (sc == 0x4B) { // left
+        buf_push(KEY_LEFT); 
+        return; 
+    }   
+    if (sc == 0x4D) { // right
+        buf_push(KEY_RIGHT); 
+        return; 
+    }  
+
+
     if (sc & 0x80) return;     // key release
     char c = scancode_map[sc];
     if (c) buf_push(c);

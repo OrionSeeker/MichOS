@@ -27,6 +27,7 @@ OBJS = $(BUILD_DIR)/multiboot.o \
        $(BUILD_DIR)/idt.o \
        $(BUILD_DIR)/keyboard.o \
        $(BUILD_DIR)/interrupt.o \
+	   $(BUILD_DIR)/shell.o \
        $(BUILD_DIR)/kernel.o
 
 
@@ -75,6 +76,9 @@ $(BUILD_DIR)/gdt.o: gdt.asm | $(BUILD_DIR)
 
 # compile keyboard driver
 $(BUILD_DIR)/keyboard.o: keyboard.c keyboard.h | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+# compile shell
+$(BUILD_DIR)/shell.o: shell.c shell.h | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 

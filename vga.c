@@ -52,3 +52,10 @@ void clear_screen() {
     }
     row = col = 0;
 }
+
+
+void clear_line() {
+    while (col > 0) {
+        backspace();
+    }
+}
