@@ -12,7 +12,8 @@ static const char* commands[] = {
     "help",
     "clear",
     "uptime",
-    "sleep"
+    "sleep",
+    "version"
 };
 
 #define CMD_COUNT (sizeof(commands)/sizeof(commands[0]))
@@ -141,6 +142,7 @@ static void shell_execute(void) {
         print("  help    - show this message\n");
         print("  clear   - clear screen\n");
         print("  echo    - echo text\n");
+        print("  version - show version\n");
         print("  uptime  - show uptime (seconds)\n");
         print("  sleep N - sleep N seconds\n\n");
     }
@@ -151,6 +153,13 @@ static void shell_execute(void) {
         print("Uptime: ");
         print_uint(pit_uptime_seconds());
         print(" sec\n");
+    }
+    else if (starts_with(input, "echo ")) {
+        print(input + 5);
+        print("\n");
+    }
+    else if (strcmp(input, "version") == 0) {
+        print("MichOS version 0.3.1\n");
     }
     else if (starts_with(input, "sleep ")) {
         int sec = 0;

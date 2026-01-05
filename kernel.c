@@ -13,7 +13,7 @@ static uint8_t kernel_stack[16384];
 
 void kernel_main() {
     clear_screen();
-    print("MichOS v0.3\n");
+    print("MichOS v0.3.1\n");
     print("by Michael Effendy (OrionSeeker on GitHub)\n\n");
 
     print("Type 'help' to see commands\n\n");
