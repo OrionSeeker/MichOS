@@ -46,6 +46,8 @@ GitHub: OrionSeeker
   - clear
   - uptime
   - sleep N
+  - echo
+  - version
 
 ### Output
 - VGA text mode output
